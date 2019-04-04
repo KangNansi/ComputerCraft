@@ -12,7 +12,7 @@ currentPath = "/"
 function DrawCurrentPath()
     files = fs.list(currentPath)
     local y = 0
-    if currentPath != "/" then
+    if currentPath ~= "/" then
         if gui.Button(mon, "..", 4, 3 + y, 15, 1) then
             currentPath = fs.getDir(currentPath)
         end
