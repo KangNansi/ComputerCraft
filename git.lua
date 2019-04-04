@@ -9,7 +9,7 @@ function GetFileName(s)
 end
 
 if args[1] == "get" then
-    local dir = args[2]
+    local dir = "lzos"
     local r = http.get(gaddr.."repos/KangNansi/ComputerCraft/contents/")
     local s = r.readAll()
 

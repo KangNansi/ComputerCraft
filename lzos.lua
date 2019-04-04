@@ -1,3 +1,3 @@
-os.loadAPI("gui")
+os.loadAPI("lzos/gui")
 
 gui.Button("button")
