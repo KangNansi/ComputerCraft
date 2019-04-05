@@ -44,6 +44,7 @@ end
 
 function clean()
     mon.setCursorPos(0,0)
+    mon.setTextColor(colors.white)
     mon.setBackgroundColor(colors.black)
     mon.clear()
 end
