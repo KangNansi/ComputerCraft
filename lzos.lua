@@ -55,14 +55,17 @@ end
 
 function DrawMenu()
     local sizex, sizey = mon.getSize()
-    local posx = sizex - 5
+    local posx = sizex/2 - 5
 
-    if gui.Button(mon, "quit", posx, 4, 10, 1) then
-        quit = true
+    if gui.Button(mon, "Back", posx, 4, 10, 1) then
+        state = main
     end
-    if gui.Button(mon, "update", posx, 5, 10, 1) then
+    if gui.Button(mon, "Update", posx, 5, 10, 1) then
         clean()
         shell.run("update")
+        quit = true
+    end
+    if gui.Button(mon, "Quit", posx, 6, 10, 1) then
         quit = true
     end
 end
