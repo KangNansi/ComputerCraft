@@ -19,7 +19,7 @@ function DrawCurrentPath()
     end
     for _, file in ipairs(files) do
         y = y + 1
-        if fs.isDir(file) then
+        if fs.isDir(fs.combine(currentPath, file)) then
             if gui.Button(mon, file, 4, 3 + y, 15, 1) then
                 currentPath = file
             end
@@ -45,4 +45,7 @@ while not quit do
 
     gui.EndLoop()
 end
+
+mon.setBackgroundColor(colors.black)
+mon.clear()
 
