@@ -3,6 +3,10 @@ os.loadAPI("lzos/gui")
 
 local quit = false
 
+local main, menu = 0, 1
+
+local state = main
+
 args = {...}
 
 if #args > 1 then
@@ -49,6 +53,20 @@ function clean()
     mon.clear()
 end
 
+function DrawMenu()
+    local sizex, sizey = mon.getSize()
+    local posx = sizex - 5
+
+    if gui.Button(mon, "quit", posx, 4, 10, 1) then
+        quit = true
+    end
+    if gui.Button(mon, "update", posx, 5, 10, 1) then
+        clean()
+        shell.run("update")
+        quit = true
+    end
+end
+
 os.queueEvent("repaint")
 
 while not quit do
@@ -57,19 +75,17 @@ while not quit do
     mon.setBackgroundColor(colors.black)
     mon.clear()
 
-    if gui.Button(mon, "quit", 1, 1, 5, 1) then
-        quit = true
-    end
-    if gui.Button(mon, "update", 1, 2, 5, 1) then
-        clean()
-        shell.run("update")
-        os.reboot()
-        break
+    gui.Label(mon, "LZos v0.0.11", mon.getSize()/2-5, 1)
+
+    if gui.Button(mon, "O", 1, 1, 1, 1) then
+        state = menu
     end
 
-    gui.Label(mon, "LZos v0.0.1", mon.getSize()/2-5, 1)
-
-    DrawCurrentPath()
+    if state == menu then
+        DrawMenu()
+    elseif state == main then
+        DrawCurrentPath()
+    end
 
     gui.EndLoop()
 end
