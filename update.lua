@@ -17,11 +17,14 @@ local obj = json.decode(s)
 for _, file in pairs(obj) do 
     print("download..."..file.name)
 
-    
-    local filename = dir.."/"..GetFileName(file.name)
+    local filename = ""
+
     if file.name == "startup" then
         filename = file.name
+    else
+        filename = dir.."/"..GetFileName(file.name)
     end
+        
     if not fs.isDir(dir) then
         fs.makeDir(dir)
     end
