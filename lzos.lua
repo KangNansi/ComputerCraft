@@ -63,7 +63,7 @@ function DrawMenu()
     if gui.Button(mon, "Update", posx, 5, 10, 1) then
         clean()
         shell.run("update")
-        quit = true
+        os.reboot()
     end
     if gui.Button(mon, "Quit", posx, 6, 10, 1) then
         quit = true
