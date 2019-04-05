@@ -42,6 +42,8 @@ function DrawCurrentPath()
     end
 end
 
+os.queueEvent("repaint")
+
 while not quit do
     gui.PullEvent()
     
@@ -52,7 +54,8 @@ while not quit do
         quit = true
     end
     if gui.Button(mon, "update", 1, 2, 5, 1) then
-        shel.run("git get")
+        shell.run("update")
+        os.reboot()
         break
     end
 
