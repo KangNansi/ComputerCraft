@@ -43,7 +43,7 @@ function DrawCurrentPath()
 end
 
 function clean()
-    mon.setCursorPos(0,0)
+    mon.setCursorPos(1,1)
     mon.setTextColor(colors.white)
     mon.setBackgroundColor(colors.black)
     mon.clear()
