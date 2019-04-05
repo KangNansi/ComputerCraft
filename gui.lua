@@ -34,3 +34,12 @@ function Label(mon, title, x, y)
     mon.setBackgroundColor(colors.black)
     mon.write(title)
 end
+
+function GetScroll()
+    if currentEvent == "mouse_scroll" then
+        repaint = true
+        return ep1
+    else
+        return 0
+    end
+end

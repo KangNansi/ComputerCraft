@@ -15,23 +15,29 @@ if mon == nil then
 end
 
 currentPath = ""
+scrollPos = 0
 
 function DrawCurrentPath()
     files = fs.list(currentPath)
     local y = 0
-    if currentPath ~= "" then
+    scrollPos = scrollPos + gui.GetScroll()
+    if scrollPos < 0 then scrollPos = 0 end
+    if scrollPos > #files then scrollPos = #files end
+    if currentPath ~= "" and scrollPos <= 0 then
         if gui.Button(mon, "..", 4, 3 + y, 15, 1) then
             currentPath = fs.getDir(currentPath)
         end
     end
     for _, file in ipairs(files) do
         y = y + 1
-        if fs.isDir(fs.combine(currentPath, file)) then
-            if gui.Button(mon, file, 4, 3 + y, 15, 1) then
-                currentPath = fs.combine(currentPath, file)
+        if y  > scrollPos then
+            if fs.isDir(fs.combine(currentPath, file)) then
+                if gui.Button(mon, file, 4, 3 + y - scrollPos, 15, 1) then
+                    currentPath = fs.combine(currentPath, file)
+                end
+            else
+                gui.Label(mon, file, 4, 3 + y)
             end
-        else
-            gui.Label(mon, file, 4, 3 + y)
         end
     end
 end
