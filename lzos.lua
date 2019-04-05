@@ -17,8 +17,8 @@ function DrawCurrentPath()
             currentPath = fs.getDir(currentPath)
         end
     end
-    for _, file in ipais(files) do
-        y++
+    for _, file in ipairs(files) do
+        y = y + 1
         if fs.isDir(file) then
             if gui.Button(mon, file, 4, 3 + y, 15, 1) then
                 currentPath = file
