@@ -25,7 +25,7 @@ function DrawCurrentPath()
         y = y + 1
         if fs.isDir(fs.combine(currentPath, file)) then
             if gui.Button(mon, file, 4, 3 + y, 15, 1) then
-                currentPath = file
+                currentPath = fs.combine(currentPath, file)
             end
         else
             gui.Label(mon, file, 4, 3 + y)
