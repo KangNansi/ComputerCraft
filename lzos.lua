@@ -42,6 +42,12 @@ function DrawCurrentPath()
     end
 end
 
+function clean()
+    mon.setCursorPos(0,0)
+    mon.setBackgroundColor(colors.black)
+    mon.clear()
+end
+
 os.queueEvent("repaint")
 
 while not quit do
@@ -54,6 +60,7 @@ while not quit do
         quit = true
     end
     if gui.Button(mon, "update", 1, 2, 5, 1) then
+        clean()
         shell.run("update")
         os.reboot()
         break
@@ -66,6 +73,6 @@ while not quit do
     gui.EndLoop()
 end
 
-mon.setBackgroundColor(colors.black)
-mon.clear()
+clean()
+
 
