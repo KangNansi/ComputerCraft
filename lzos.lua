@@ -36,7 +36,7 @@ function DrawCurrentPath()
                     currentPath = fs.combine(currentPath, file)
                 end
             else
-                gui.Label(mon, file, 4, 3 + y)
+                gui.Label(mon, file, 4, 3 + y - scrollPos)
             end
         end
     end
