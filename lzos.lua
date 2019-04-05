@@ -5,7 +5,11 @@ local quit = false
 
 args = {...}
 
-mon = peripheral.wrap(args[1])
+if #args > 1 then
+    mon = peripheral.wrap(args[1])
+else
+    mon = peripheral.find("monitor")
+end
 
 currentPath = ""
 
