@@ -7,12 +7,12 @@ args = {...}
 
 mon = peripheral.wrap(args[1])
 
-currentPath = "/"
+currentPath = ""
 
 function DrawCurrentPath()
     files = fs.list(currentPath)
     local y = 0
-    if currentPath ~= "/" then
+    if currentPath ~= "" then
         if gui.Button(mon, "..", 4, 3 + y, 15, 1) then
             currentPath = fs.getDir(currentPath)
         end
@@ -32,6 +32,7 @@ end
 while not quit do
     gui.PullEvent()
     
+    mon.setBackgroundColor(colors.black)
     mon.clear()
 
     if gui.Button(mon, "quit", 1, 1, 5, 1) then
@@ -41,5 +42,7 @@ while not quit do
     gui.Label(mon, "LZos v0.0.1", mon.getSize()/2-5, 1)
 
     DrawCurrentPath()
+
+    gui.EndLoop()
 end
 
