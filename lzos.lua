@@ -10,6 +10,9 @@ if #args > 1 then
 else
     mon = peripheral.find("monitor")
 end
+if mon == nil then
+    mon = term
+end
 
 currentPath = ""
 
