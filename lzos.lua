@@ -110,7 +110,7 @@ while not quit do
     mon.clear()
 
     gui.Label(mon, "LZos v0.0.11", mon.getSize()/2-5, 1, colors.lightBlue)
-    date = textUtils.formatTime(os.time(), true)
+    date = textutils.formatTime(os.time(), true)
     dateLen = string.len(date)
     gui.Label(mon, date, mon.getSize() - dateLen, 1, colors.lightBlue)
 
