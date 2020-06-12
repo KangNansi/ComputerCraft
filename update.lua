@@ -1,4 +1,4 @@
-os.loadAPI("json")
+os.loadAPI("json.lua")
 
 local gaddr = "https://api.github.com/"
 

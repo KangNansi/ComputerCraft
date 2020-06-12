@@ -18,28 +18,26 @@ function EndLoop()
     end
 end
 
-function Button(mon, title, x, y, w, h, noBackground)
-    noBackground = noBackground or true
+function Button(mon, title, x, y, w, h, bgColor, fgColor)
+    bgColor = bgColor or colors.black
+    fgColor = fgColor or colors.white
     w = w or string.len(title)
     h = h or 1
     mon.setCursorPos(x,y)
-    if not noBackground then
-        mon.setTextColor(colors.black)
-        mon.setBackgroundColor(colors.white)
-    else
-        mon.setBackgroundColor(colors.black)
-        mon.setTextColor(colors.white)
-    end
+    mon.setTextColor(fgColor)
+    mon.setBackgroundColor(bgColor)
     mon.write(title)
     clicked = currentEvent == "mouse_click" and IsIn(ep2, ep3, x, y, x+w-1, y+h-1)
     if clicked then repaint = true end
     return clicked
 end
 
-function Label(mon, title, x, y)
+function Label(mon, title, x, y, textColor, bgColor)
+    textColor = textColor or colors.white
+    bgColor = bgColor or colors.black
     mon.setCursorPos(x,y)
-    mon.setTextColor(colors.white)
-    mon.setBackgroundColor(colors.black)
+    mon.setTextColor(textColor)
+    mon.setBackgroundColor(bgColor)
     mon.write(title)
 end
 

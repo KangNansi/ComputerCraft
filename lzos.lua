@@ -28,7 +28,7 @@ function DrawCurrentPath()
     if scrollPos < 0 then scrollPos = 0 end
     if scrollPos > #files then scrollPos = #files end
     if currentPath ~= "" and scrollPos <= 0 then
-        if gui.Button(mon, "..", 4, 3 + y, 15, 1) then
+        if gui.Button(mon, "..", 4, 3 + y, 15, 1, colors.white, colors.black) then
             currentPath = fs.getDir(currentPath)
         end
     end
@@ -36,7 +36,7 @@ function DrawCurrentPath()
         y = y + 1
         if y  > scrollPos then
             if fs.isDir(fs.combine(currentPath, file)) then
-                if gui.Button(mon, file, 4, 3 + y - scrollPos, 15, 1) then
+                if gui.Button(mon, file, 4, 3 + y - scrollPos, 15, 1, colors.white, colors.black) then
                     currentPath = fs.combine(currentPath, file)
                 end
             else
@@ -76,12 +76,12 @@ end
 selectedFile = ""
 
 function OnFileSelect()
-    if gui.Button(mon, "Edit", 0, 4, 10, 1) then
+    if gui.Button(mon, "Edit", 1, 4, 10, 1) then
         shell.run("edit /" .. selectedFile)
         state = main
     end
-    if gui.Button(mon, "Run", 0, 5, 10, 1) then
-        shel.run(selectedFile)
+    if gui.Button(mon, "Run", 1, 5, 10, 1) then
+        shell.run(selectedFile)
         state = main
     end
 end
@@ -94,9 +94,9 @@ while not quit do
     mon.setBackgroundColor(colors.black)
     mon.clear()
 
-    gui.Label(mon, "LZos v0.0.11", mon.getSize()/2-5, 1)
+    gui.Label(mon, "LZos v0.0.11", mon.getSize()/2-5, 1, colors.lightBlue)
 
-    if gui.Button(mon, "O", 1, 1, 1, 1) then
+    if gui.Button(mon, "O", 1, 1, 1, 1, colors.lightBlue, colors.black) then
         if state == menu then
             state = main
         else
