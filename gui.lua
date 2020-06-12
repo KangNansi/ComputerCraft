@@ -28,8 +28,8 @@ function PullEvent()
 end
 
 function EndLoop()
-    if cursorMonitor and blinking then
-        cursorMonitor.setCursorBlink(true)
+    if cursorMonitor then
+        cursorMonitor.setCursorBlink(blinking)
         cursorMonitor.setCursorPos(cursorPosX, cursorPosY)
     end
     
@@ -63,6 +63,7 @@ function Label(mon, title, x, y, textColor, bgColor)
 end
 
 function TextEdit(mon, currentText, x, y)
+    currentText = currentText or ""
     controlId = getControlId()
     data = controlData[controlId] or {}
     data.cursorPos = data.cursorPos or 1
