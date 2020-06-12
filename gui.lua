@@ -78,7 +78,7 @@ function TextEdit(mon, currentText, x, y)
 
     cursorMonitor = mon
     blinking = true
-    cursorPosX = x + currentText.len()
+    cursorPosX = x + string.len(currentText)
     cursorPosY = y
 
     mon.setCursorPos(x,y)
