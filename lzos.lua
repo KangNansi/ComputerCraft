@@ -40,7 +40,7 @@ function DrawCurrentPath()
                     currentPath = fs.combine(currentPath, file)
                 end
             else
-                if gui.Button(mon, file, 4, 3 + y - scrollPos) then
+                if gui.Button(mon, file, 4, 3 + y - scrollPos, 15, 1) then
                     selectedFile = fs.combine(currentPath, file)
                     state = OnFileSelect
                 end
