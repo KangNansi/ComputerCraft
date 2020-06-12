@@ -3,15 +3,36 @@ currentEvent = nil
 ep1, ep2, ep3 = nil
 repaint = false
 
+idCount = 0
+controlData = {}
+
+cursorPosX = 1
+cursorPosY = 1
+
+blinking = false
+
+Monitor = nil
+
+function getControlId()
+    idCount = idCount + 1
+    return idCount
+end
+
 function IsIn(x,y, minx, miny, maxx, maxy)
     return x >= minx and x <= maxx and y >= miny and y <= maxy
 end
 
 function PullEvent()
     currentEvent, ep1, ep2, ep3 = os.pullEvent()
+    idCount = 0
+    blinking = false
 end
 
 function EndLoop()
+    Monitor.setCursorBlink(blinking)
+    if blinking then
+        Monitor.setCursorPos(cursorPosX, cursorPosY)
+    end
     if repaint then
         os.queueEvent("repaint")
         repaint = false
@@ -42,9 +63,23 @@ function Label(mon, title, x, y, textColor, bgColor)
 end
 
 function TextEdit(mon, currentText, x, y)
+    controlId = getControlId()
+    data = controlData[controlId] or {}
+    data.cursorPos = data.cursorPos or 1
+
+    if currentEvent == "key" then
+        if ep1 == keys.backspace and string.len(currentText) > 0 then
+            currentText = string.sub(currentText, 1, -2)
+        end
+    end
     if currentEvent == "char" then
         currentText = currentText..ep1
     end
+
+    blinking = true
+    cursorPosX = x + currentText.len()
+    cursorPosY = y
+
     mon.setCursorPos(x,y)
     mon.setTextColor(colors.white)
     mon.setBackgroundColor(colors.black)
