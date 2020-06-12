@@ -13,6 +13,10 @@ blinking = false
 
 Monitor = nil
 
+function setMonitor(mon)
+    Monitor = mon
+end
+
 function getControlId()
     idCount = idCount + 1
     return idCount
