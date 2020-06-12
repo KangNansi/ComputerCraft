@@ -6,16 +6,11 @@ repaint = false
 idCount = 0
 controlData = {}
 
+cursorMonitor = nil
 cursorPosX = 1
 cursorPosY = 1
 
 blinking = false
-
-Monitor = nil
-
-function setMonitor(mon)
-    Monitor = mon
-end
 
 function getControlId()
     idCount = idCount + 1
@@ -33,10 +28,11 @@ function PullEvent()
 end
 
 function EndLoop()
-    Monitor.setCursorBlink(blinking)
-    if blinking then
-        Monitor.setCursorPos(cursorPosX, cursorPosY)
+    if cursorMonitor and blinking then
+        cursorMonitor.setCursorBlink(true)
+        cursorMonitor.setCursorPos(cursorPosX, cursorPosY)
     end
+    
     if repaint then
         os.queueEvent("repaint")
         repaint = false
@@ -80,6 +76,7 @@ function TextEdit(mon, currentText, x, y)
         currentText = currentText..ep1
     end
 
+    cursorMonitor = mon
     blinking = true
     cursorPosX = x + currentText.len()
     cursorPosY = y

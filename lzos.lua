@@ -104,7 +104,6 @@ end
 os.queueEvent("repaint")
 
 while not quit do
-    gui.setMonitor(mon)
     gui.PullEvent()
     
     mon.setBackgroundColor(colors.black)
