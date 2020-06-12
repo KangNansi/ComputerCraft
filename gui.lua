@@ -41,6 +41,17 @@ function Label(mon, title, x, y, textColor, bgColor)
     mon.write(title)
 end
 
+function TextEdit(mon, currentText, x, y)
+    if currentEvent == "char" then
+        currentText = currentText..ep1
+    end
+    mon.setCursorPos(x,y)
+    mon.setTextColor(colors.white)
+    mon.setBackgroundColor(colors.black)
+    mon.write(currentText)
+    return currentText
+end
+
 function GetScroll()
     if currentEvent == "mouse_scroll" then
         repaint = true

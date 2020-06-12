@@ -32,6 +32,12 @@ function DrawCurrentPath()
             currentPath = fs.getDir(currentPath)
         end
     end
+
+    if gui.Button(mon, "+", 1, 4, 1, 1, colors.lightBlue, colors.black) then
+        newFileName = ""
+        state = AddNewFile
+    end
+
     for _, file in ipairs(files) do
         y = y + 1
         if y  > scrollPos then
@@ -82,6 +88,15 @@ function OnFileSelect()
     end
     if gui.Button(mon, "Run", 1, 5, 10, 1) then
         shell.run(selectedFile)
+        state = main
+    end
+end
+
+newFileName = ""
+
+function AddNewFile()
+    newFileName = gui.TextEdit(mon, newFileName, 1, 5)
+    if gui.Button(mon, "Create", 1, 6, 10, 1) then
         state = main
     end
 end
