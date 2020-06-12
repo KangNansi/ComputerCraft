@@ -40,7 +40,10 @@ function DrawCurrentPath()
                     currentPath = fs.combine(currentPath, file)
                 end
             else
-                gui.Label(mon, file, 4, 3 + y - scrollPos)
+                if gui.Button(mon, file, 4, 3 + y - scrollPos) then
+                    selectedFile = fs.combine(currentPath, file)
+                    state = OnFileSelect
+                end
             end
         end
     end
@@ -70,6 +73,19 @@ function DrawMenu()
     end
 end
 
+selectedFile = ""
+
+function OnFileSelect()
+    if gui.Button(mon, "Edit", 0, 4, 10, 1) then
+        shell.run("edit /" .. selectedFile)
+        state = main
+    end
+    if gui.Button(mon, "Run", 0, 5, 10, 1) then
+        shel.run(selectedFile)
+        state = main
+    end
+end
+
 os.queueEvent("repaint")
 
 while not quit do
@@ -81,13 +97,19 @@ while not quit do
     gui.Label(mon, "LZos v0.0.11", mon.getSize()/2-5, 1)
 
     if gui.Button(mon, "O", 1, 1, 1, 1) then
-        state = menu
+        if state == menu then
+            state = main
+        else
+            state = menu
+        end
     end
 
     if state == menu then
         DrawMenu()
     elseif state == main then
         DrawCurrentPath()
+    else
+        state()
     end
 
     gui.EndLoop()
