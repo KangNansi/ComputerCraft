@@ -20,10 +20,15 @@ end
 
 function Button(mon, title, x, y, w, h, noBackground)
     noBackground = noBackground or true
+    w = w or string.len(title)
+    h = h or 1
     mon.setCursorPos(x,y)
     if not noBackground then
         mon.setTextColor(colors.black)
         mon.setBackgroundColor(colors.white)
+    else
+        mon.setBackgroundColor(colors.black)
+        mon.setTextColor(colors.white)
     end
     mon.write(title)
     clicked = currentEvent == "mouse_click" and IsIn(ep2, ep3, x, y, x+w-1, y+h-1)
