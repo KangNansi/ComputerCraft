@@ -27,7 +27,7 @@ end
 
 function getDir()
     local r = dir
-    for i = 0, dirCount do
+    for i = 0, dirCount-1 do
         r = r.."/"..dirs[i]
     end
     return r
@@ -37,7 +37,7 @@ function downloadFile(file)
     print("Downloading "..file.name.."...")
     local dirPath = getDir()
     fs.makeDir(dirPath)
-    local filePath = dirPath..GetFileName(file.name)
+    local filePath = dirPath.."/"..GetFileName(file.name)
     local fileContent = http.get(file.download_url)
     local file = fs.open(filePath, "w")
     file.write(fileContent.readAll())

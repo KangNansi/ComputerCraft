@@ -1,14 +1,15 @@
-os.loadAPI("turtleHelper.lua")
+os.loadAPI("lzos/turtle/turtleHelper")
 
 args = {...}
 blockName = args[1]
-max = args[2] or 1000
+max = tonumber(args[2]) or 1000
 
 distance = 0
 
 function goBack()
     if distance > 0 then
         turtle.back()
+        distance = distance - 1
         return false
     else
         return true
@@ -18,14 +19,21 @@ end
 function placeState()
     turtleHelper.placeDown(blockName)
     turtle.forward()
+    distance = distance + 1
+    return false
 end
 
 state = placeState
 
 while true do
-    turtleHelper.fullRefill()
-    state()
-    if state ~= goBack and (turtle.getFuelLevel() / 2 < distance or distance >= max) then
+    if turtle.getFuelLevel() < 5 then
+        turtleHelper.refill()
+    end
+    if state() then
+        break
+    end
+
+    if state ~= goBack and (distance >= max) then
         state = goBack
     end
 end

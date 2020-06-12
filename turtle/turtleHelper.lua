@@ -1,9 +1,16 @@
 
 
 function refill()
-    for i = 0, 16 do
-        turtle.select(i)
-        if turtle.refuel() then
+    local slot = turtle.getSelectedSlot()
+    for i = 0, 15 do
+        local t = (slot + i) % 16
+        if t == 0 then
+            t = 16
+        end
+        if slot ~= t then
+            turtle.select(t)
+        end
+        if turtle.refuel(1) then
             return true
         end
     end
@@ -20,27 +27,41 @@ function fullRefill()
 end
 
 function findItem(name)
-    for i = 0, 16 do
-        turtle.select(i)
+    local slot = turtle.getSelectedSlot()
+    for i = 0, 15 do
+        local t = (slot + i) % 16
+        if t == 0 then t = 16 end
+        if t ~= slot then
+            turtle.select(t)
+        end
         local detail = turtle.getItemDetail()
-        if string.match(detail.name, name) then
-            return i
+        if detail and string.match(detail.name, name) then
+            return t
         end
     end
-    return -1
+    return 0
 end
 
 function selectItem(name)
     local itemSlot = findItem(name)
-    if itemSlot >= 0 then
+    if itemSlot > 0 then
         turtle.select(itemSlot)
         return true
     end
     return false
 end
 
+function isItemSelected(name)
+    local detail = turtle.getItemDetail()
+    if detail and string.match(detail.name, name) then
+        return true
+    else
+        return false
+    end
+end
+
 function placeDown(name)
-    if selectItem(name) then
+    if isItemSelected(name) or selectItem(name) then
         turtle.placeDown()
         return true
     else
