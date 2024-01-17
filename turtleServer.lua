@@ -3,9 +3,9 @@ local turtles = {}
 
 local function drawState()
     term.clear()
-    term.write("TurleServer v0.0.1")
-    for id, turtle in turtles do
-        term.write(turtle.id .. "   " .. turtle.state)
+    print("TurleServer v0.0.1")
+    for id, turtle in pairs(turtles) do
+        print(turtle.id .. "   " .. turtle.state)
     end
 end
 
