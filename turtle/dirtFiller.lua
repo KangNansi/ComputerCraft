@@ -1,4 +1,4 @@
-local helper = os.loadAPI("turtleHelper")
+os.loadAPI("turtleHelper")
 
 local tArgs = { ... }
 if #tArgs < 3 then
@@ -11,10 +11,10 @@ local y = tArgs[2]
 for xi = 0, x do
     for xy = 0, y do
         if turtle.getFuelLevel() < 5 then
-            helper.refill()
+            turtleHelper.refill()
         end
         local present, block = turtle.inspectDown()
-        if not present and helper.selectItem("minecraft:dirt") then
+        if not present and turtleHelper.selectItem("minecraft:dirt") then
             turtle.placeDown()
         else
             print("ran out of dirt, terminating...")
