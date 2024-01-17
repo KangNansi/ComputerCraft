@@ -3,6 +3,7 @@ local turtles = {}
 
 local function drawState()
     term.clear()
+    term.setCursorPos(1, 1)
     print("TurleServer v0.0.1")
     for id, turtle in pairs(turtles) do
         print(turtle.id .. "   " .. turtle.state)
@@ -17,9 +18,14 @@ local function bye(id, args)
     turtles[id] = nil
 end
 
+local function state(id, args)
+    turtles[id].state = args[2]
+end
+
 local handlers = {
     hello = hello,
-    bye = bye
+    bye = bye,
+    state = state
 }
 
 while true do
