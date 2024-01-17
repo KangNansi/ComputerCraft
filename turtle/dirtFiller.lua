@@ -1,7 +1,11 @@
-os.loadAPI("turtleHelper")
+local path = fs.getDir(shell.getRunningProgram())
+if path == '' then
+    path = path.."/"
+end
+os.loadAPI(path.."turtleHelper")
 
 local tArgs = { ... }
-if #tArgs < 3 then
+if #tArgs < 2 then
     print("usage: dirtFiller x y")
     return
 end
@@ -14,11 +18,13 @@ for xi = 0, x do
             turtleHelper.refill()
         end
         local present, block = turtle.inspectDown()
-        if not present and turtleHelper.selectItem("minecraft:dirt") then
-            turtle.placeDown()
-        else
-            print("ran out of dirt, terminating...")
-            return
+        if not present then
+            if turtleHelper.selectItem("minecraft:dirt") then
+                turtle.placeDown()
+            else
+                print("ran out of dirt, terminating...")
+                return
+            end
         end
     end
     if xi % 2 == 0 then
