@@ -14,7 +14,7 @@ local y = tArgs[2]
 
 local function placeDirt()
     local present, block = turtle.inspectDown()
-    if present and (block.name ~= "minecraft:dirt" or block.name ~= "minecraft:grass") then
+    if present and block.name ~= "minecraft:dirt" and block.name ~= "minecraft:grass" then
         turtle.digDown()
     end 
     if not present or not turtle.detectDown() then
